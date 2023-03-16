@@ -1,4 +1,4 @@
-package Data;
+package Data.Interfaces;
 
 import Models.User;
 
@@ -9,9 +9,13 @@ public interface IUserData {
 
     void saveUser(User newUser);
 
+    void updateUsers(ArrayList<User> users);
+
     void readUsersFromFile();
 
     int getLastId();
 
     int getUpdatedId();
+
+    boolean isUserNameUnique(String username);
 }
