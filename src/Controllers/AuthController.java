@@ -1,8 +1,9 @@
 package Controllers;
 
-import Data.IUserData;
+import Data.Interfaces.IUserData;
 import Data.UserData;
 import Models.User;
+import Views.Messenger;
 
 public class AuthController {
     public User user;
@@ -10,6 +11,11 @@ public class AuthController {
     public Middleware middleware = new Middleware();
 
     public void register(String name, String username, String password) {
+        if (!userData.isUserNameUnique(username)) {
+            Messenger messenger = new Messenger();
+            messenger.oneLineTitle("Username is already taken!");
+            return;
+        }
         this.user = new User(userData.getUpdatedId(), name, username, password, false);
         userData.saveUser(this.user);
         this.user = null;
