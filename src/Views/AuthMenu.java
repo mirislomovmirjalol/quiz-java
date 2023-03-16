@@ -4,84 +4,57 @@ import Controllers.AuthController;
 
 public class AuthMenu {
 
-    public AuthController authController = new AuthController();
-    public KeyboardReader keyboardReader = new KeyboardReader();
+    AuthController authController = new AuthController();
+    KeyboardReader keyboardReader = new KeyboardReader();
+
+    Messenger messenger = new Messenger();
 
     public void run() {
-        String[] options = {"Login", "Register"};
-        for (int i = 0; i < options.length; i++) {
-            System.out.println((i + 1) + ". " + options[i]);
-        }
-
-        int choice = keyboardReader.getInt("\n\nPlease choose an option", 1, options.length);
-        switch (choice) {
-            case 1 -> login();
-            case 2 -> register();
+        boolean exit = false;
+        String[] options = {"Login", "Register", "Exit"};
+        while (!exit) {
+            for (int i = 0; i < options.length; i++) {
+                System.out.println((i + 1) + ". " + options[i]);
+            }
+            int choice = keyboardReader.getInt("\n\nPlease choose an option", 1, options.length);
+            switch (choice) {
+                case 1 -> login();
+                case 2 -> register();
+                case 3 -> System.exit(0);
+            }
         }
     }
 
     public void login() {
-        String username = keyboardReader.getString("Please enter your username");
-        String password = keyboardReader.getString("Please enter your password");
+        messenger.oneLineTitle("Login");
+        String username = keyboardReader.getString("Please enter your username", false);
+        String password = keyboardReader.getString("Please enter your password", false);
 
         authController.login(username, password);
         authController.isUserLoggedIn();
 
         if (authController.isUserLoggedIn()) {
-            System.out.println("\n\n" +
-                    """
-                            ______________________________
-                             User logged in successfully
-                             
-                             Hello\t""" + authController.user.getName() +
-                    """
-                            \n______________________________
-                            """
-            );
+            messenger.loginSuccessfully(authController.user.getName());
             MainMenu mainMenu = new MainMenu(authController);
             mainMenu.run();
         } else {
-            System.out.println("\n\n" +
-                    """
-                            ______________________________
-                             User login failed
-                             
-                             Please check your credentials
-                            ______________________________
-                            """
-            );
+            messenger.loginFailed();
             run();
         }
     }
 
     public void register() {
-        String name = keyboardReader.getString("Please enter your name");
-        String username = keyboardReader.getString("Please enter your username");
-        String password = keyboardReader.getString("Please enter your password");
+        messenger.oneLineTitle("Register");
+        String name = keyboardReader.getString("Please enter your name", false);
+        String username = keyboardReader.getString("Please enter your username", false);
+        String password = keyboardReader.getString("Please enter your password", false);
         authController.register(name, username, password);
         if (authController.isUserLoggedIn()) {
-            System.out.println("\n\n" +
-                    """
-                            ______________________________
-                             User registered successfully
-                             
-                             """ + " Hello\t" + authController.user.getName() +
-                    """
-                            \n______________________________
-                            """
-            );
+            messenger.registerSuccessfully(authController.user.getName());
             MainMenu mainMenu = new MainMenu(authController);
             mainMenu.run();
         } else {
-            System.out.println("\n\n" +
-                    """
-                            ______________________________
-                             User registration failed
-                             
-                             Please try again
-                            ______________________________
-                            """
-            );
+            messenger.registerFailed();
             run();
         }
     }

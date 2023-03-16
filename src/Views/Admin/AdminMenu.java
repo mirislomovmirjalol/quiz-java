@@ -1,12 +1,16 @@
-package Views;
+package Views.Admin;
 
-import Controllers.AdminController;
+import Controllers.Admin.AdminController;
+import Controllers.Admin.UserController;
 import Controllers.AuthController;
+import Views.KeyboardReader;
+import Views.Messenger;
 
 public class AdminMenu {
     public KeyboardReader keyboardReader = new KeyboardReader();
     public AuthController authController;
     public AdminController adminController;
+    public Messenger messenger = new Messenger();
 
     public AdminMenu(AuthController authController, AdminController adminController) {
         this.authController = authController;
@@ -14,14 +18,9 @@ public class AdminMenu {
     }
 
     public void run() {
+        messenger.oneLineTitle("Admin panel");
         if (!authController.isUserAdmin()) {
-            System.out.println("\n\n" + """
-                    ______________________________
-                     You are not an admin!
-                     
-                     Please login as an admin
-                    ______________________________
-                    """);
+            messenger.notAdmin();
             return;
         }
         String[] options = {"Users", "Quizzes", "Questions", "Back"};
@@ -41,7 +40,8 @@ public class AdminMenu {
     }
 
     public void users() {
-        System.out.println("Users");
+        UserMenu userMenu = new UserMenu(authController);
+        userMenu.run();
     }
 
     public void quizzes() {
@@ -49,7 +49,7 @@ public class AdminMenu {
     }
 
     public void questions() {
-        QuestionAdminMenu questionAdminMenu = new QuestionAdminMenu(authController, adminController);
-        questionAdminMenu.run();
+        QuestionMenu questionMenu = new QuestionMenu(authController, adminController);
+        questionMenu.run();
     }
 }
