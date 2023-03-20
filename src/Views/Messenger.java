@@ -1,8 +1,6 @@
 package Views;
 
 public class Messenger {
-
-
     public void oneLineTitle(String title) {
         System.out.println("""
                 \n
@@ -16,7 +14,7 @@ public class Messenger {
         System.out.println(
                 """
                         ______________________________________________________________
-                        """ + firstTitle + """
+                        """ + firstTitle + "\n\n" +"""
                         """ + secondTitle + """
                         \n______________________________________________________________
                         """);
@@ -94,6 +92,33 @@ public class Messenger {
                 ______________________________________________________________
                 """ + "You got " + score + " out of " + questionsSize + " correct!" + """
                 \n______________________________________________________________
+                """);
+    }
+
+    public void updateQuestion(String oldQuestion) {
+        System.out.println("\n\n" + """
+                ______________________________________________________
+                 Please enter the question
+                 """ + "Old question: " + oldQuestion + """
+                \n______________________________________________________
+                """);
+    }
+
+    public void updateAnswer(String oldAnswer) {
+        System.out.println("\n\n" + """
+                ______________________________________________________
+                 Please enter the answer
+                 """ + "Old answer: " + oldAnswer + """
+                \n______________________________________________________
+                """);
+    }
+
+    public void updateOption(String oldOption) {
+        System.out.println("\n\n" + """
+                ______________________________________________________
+                 Please enter the option
+                 """ + "Old option: " + oldOption + """
+                \n______________________________________________________
                 """);
     }
 }
