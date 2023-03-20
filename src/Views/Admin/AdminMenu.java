@@ -18,6 +18,10 @@ public class AdminMenu {
     }
 
     public void run() {
+        final int USERS_OPTION = 1;
+        final int QUIZZES_OPTION = 2;
+        final int QUESTIONS_OPTION = 3;
+        final int BACK_OPTION = 4;
         messenger.oneLineTitle("Admin panel");
         if (!authController.isUserAdmin()) {
             messenger.notAdmin();
@@ -31,10 +35,10 @@ public class AdminMenu {
             }
             int choice = keyboardReader.getInt("\n\nPlease choose an option", 0, options.length);
             switch (choice) {
-                case 1 -> users();
-                case 2 -> quizzes();
-                case 3 -> questions();
-                case 4 -> exit = true;
+                case USERS_OPTION -> users();
+                case QUIZZES_OPTION -> quizzes();
+                case QUESTIONS_OPTION -> questions();
+                case BACK_OPTION -> exit = true;
             }
         }
     }

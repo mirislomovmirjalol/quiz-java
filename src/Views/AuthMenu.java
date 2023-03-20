@@ -10,6 +10,9 @@ public class AuthMenu {
     Messenger messenger = new Messenger();
 
     public void run() {
+        final int LOGIN_OPTION = 1;
+        final int REGISTER_OPTION = 2;
+        final int EXIT_OPTION = 3;
         boolean exit = false;
         String[] options = {"Login", "Register", "Exit"};
         while (!exit) {
@@ -18,9 +21,9 @@ public class AuthMenu {
             }
             int choice = keyboardReader.getInt("\n\nPlease choose an option", 1, options.length);
             switch (choice) {
-                case 1 -> login();
-                case 2 -> register();
-                case 3 -> System.exit(0);
+                case LOGIN_OPTION -> login();
+                case REGISTER_OPTION -> register();
+                case EXIT_OPTION -> System.exit(0);
             }
         }
     }
