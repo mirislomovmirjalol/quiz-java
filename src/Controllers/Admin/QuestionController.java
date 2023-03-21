@@ -1,32 +1,32 @@
-package Controllers;
+package Controllers.Admin;
 
+import Controllers.AuthController;
+import Data.Interfaces.IQuestionData;
 import Data.QuestionData;
 import Models.Option;
 import Models.Question;
-import Views.AdminMenu;
-import Views.QuestionAdminMenu;
+import Views.Admin.AdminMenu;
+import Views.Admin.QuestionMenu;
 
 import java.util.ArrayList;
 
-public class AdminQuestionController {
+public class QuestionController {
 
-    private AuthController authController;
-    private AdminMenu adminMenu;
-    private QuestionData questionData = new QuestionData();
-    private AdminController adminController;
+    AuthController authController;
+    IQuestionData questionData = new QuestionData();
+    AdminController adminController;
     ArrayList<Question> questions = new ArrayList<Question>();
 
 
-    public AdminQuestionController(AuthController authController, AdminController adminController) {
+    public QuestionController(AuthController authController, AdminController adminController) {
         this.authController = authController;
         this.adminController = adminController;
-        this.adminMenu = new AdminMenu(authController, adminController);
     }
 
     public void showQuestions(boolean isAction) {
         questions = questionData.getQuestions();
-        QuestionAdminMenu questionAdminMenu = new QuestionAdminMenu(authController, adminController);
-        questionAdminMenu.show(questions, isAction);
+        QuestionMenu questionMenu = new QuestionMenu(authController, adminController);
+        questionMenu.show(questions, isAction);
     }
 
     public void createQuestion(String question, String answer, String options) {
@@ -67,5 +67,4 @@ public class AdminQuestionController {
         questions.remove(questionToDelete);
         questionData.updateQuestions(questions);
     }
-
 }
