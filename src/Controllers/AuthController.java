@@ -7,19 +7,18 @@ import Views.Messenger;
 
 public class AuthController {
     public User user;
-    public IUserData userData = new UserData();
-    public Middleware middleware = new Middleware();
+    IUserData userData = new UserData();
+    Middleware middleware = new Middleware();
 
-    public void register(String name, String username, String password) {
+    public boolean register(String name, String username, String password) {
         if (!userData.isUserNameUnique(username)) {
-            Messenger messenger = new Messenger();
-            messenger.oneLineTitle("Username is already taken!");
-            return;
+            return false;
         }
         this.user = new User(userData.getUpdatedId(), name, username, password, false);
         userData.saveUser(this.user);
         this.user = null;
         login(username, password);
+        return true;
     }
 
     public void login(String username, String password) {

@@ -51,7 +51,11 @@ public class AuthMenu {
         String name = keyboardReader.getString("Please enter your name", false);
         String username = keyboardReader.getString("Please enter your username", false);
         String password = keyboardReader.getString("Please enter your password", false);
-        authController.register(name, username, password);
+        boolean registrationSuccessful = authController.register(name, username, password);
+        if (!registrationSuccessful) {
+            messenger.oneLineTitle("Username is already taken!");
+            run();
+        }
         if (authController.isUserLoggedIn()) {
             messenger.registerSuccessfully(authController.user.getName());
             MainMenu mainMenu = new MainMenu(authController);
