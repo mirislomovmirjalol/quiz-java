@@ -38,8 +38,6 @@ public class QuestionController {
         }
         Question newQuestion = new Question(questionData.getUpdatedId(), question, answerOption, optionsList);
         questionData.saveQuestionToFile(newQuestion);
-
-//        reminder - message to user
     }
 
     public int sizeOfQuestions() {
