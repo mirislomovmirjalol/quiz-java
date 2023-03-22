@@ -1,6 +1,9 @@
 package Models;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import static java.lang.Math.round;
 
 public class Quiz {
     private int id;
@@ -29,6 +32,13 @@ public class Quiz {
 
     public double getPercentage() {
         return percentage;
+    }
+
+    public double getFormattedPercentage() {
+        double result;
+        DecimalFormat df = new DecimalFormat("#.##");
+        result = Double.parseDouble(df.format(percentage));
+        return result;
     }
 
     public void setPercentage(double percentage) {
