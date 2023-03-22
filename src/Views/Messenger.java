@@ -13,8 +13,9 @@ public class Messenger {
     public void twoLineTitle(String firstTitle, String secondTitle) {
         System.out.println(
                 """
+                        \n
                         ______________________________________________________________
-                        """ + firstTitle + "\n\n" +"""
+                        """ + firstTitle + "\n\n" + """
                         """ + secondTitle + """
                         \n______________________________________________________________
                         """);
