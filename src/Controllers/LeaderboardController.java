@@ -16,8 +16,10 @@ public class LeaderboardController {
     ArrayList<User> users;
     IQuizData quizData = new QuizData();
     UserData userData = new UserData();
+    AuthController authController;
 
-    public LeaderboardController() {
+    public LeaderboardController(AuthController authController) {
+        this.authController = authController;
         this.users = userData.getUsers();
         this.quizzes = quizData.getQuizzes();
         sortQuizzes();
@@ -42,9 +44,13 @@ public class LeaderboardController {
         for (Quiz quiz : quizzes) {
             User user = userData.getUserById(quiz.getUserId());
             if (user != null) {
-                leaderboard.add(user.getName() + " - " + quiz.getPercentage() + "%");
+                if (user.getId() == authController.user.getId()) {
+                    leaderboard.add(user.getName() + " - " + quiz.getPercentage() + "% | " + quiz.getDate() + " | Me");
+                    continue;
+                }
+                leaderboard.add(user.getName() + " - " + quiz.getPercentage() + "% | " + quiz.getDate());
             } else {
-                leaderboard.add("Anonymous - " + quiz.getPercentage() + "%");
+                leaderboard.add("Anonymous - " + quiz.getPercentage() + "% | " + quiz.getDate());
             }
         }
     }

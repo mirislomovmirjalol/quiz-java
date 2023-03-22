@@ -61,6 +61,6 @@ public class MainMenu {
     }
 
     public void leaderboard() {
-        LeaderboardController leaderboardController = new LeaderboardController();
+        LeaderboardController leaderboardController = new LeaderboardController(authController);
     }
 }
