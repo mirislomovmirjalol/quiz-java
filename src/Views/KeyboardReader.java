@@ -24,7 +24,6 @@ public class KeyboardReader {
                 } else {
                     valid = true;
                 }
-                return retv;
             } catch (NumberFormatException e) {
                 messenger.twoLineTitle("Only valid integers are allowed", "Please try again");
             }

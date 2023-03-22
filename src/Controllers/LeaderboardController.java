@@ -22,7 +22,6 @@ public class LeaderboardController {
         this.authController = authController;
         this.users = userData.getUsers();
         this.quizzes = quizData.getQuizzes();
-        sortQuizzes();
         makeLeaderBoard();
         Leaderboard leaderboard = new Leaderboard();
         leaderboard.showLeaderboard(this.leaderboard);
@@ -31,7 +30,7 @@ public class LeaderboardController {
     public void sortQuizzes() {
         for (int i = 0; i < quizzes.size(); i++) {
             for (int j = 0; j < quizzes.size(); j++) {
-                if (quizzes.get(i).getPercentage() > quizzes.get(j).getPercentage()) {
+                if (quizzes.get(i).getFormattedPercentage() > quizzes.get(j).getFormattedPercentage()) {
                     Quiz temp = quizzes.get(i);
                     quizzes.set(i, quizzes.get(j));
                     quizzes.set(j, temp);
@@ -41,16 +40,18 @@ public class LeaderboardController {
     }
 
     public void makeLeaderBoard() {
-        for (Quiz quiz : quizzes) {
+        sortQuizzes();
+        for (int i = 0; i < 10; i++) {
+            Quiz quiz = quizzes.get(i);
             User user = userData.getUserById(quiz.getUserId());
             if (user != null) {
                 if (user.getId() == authController.user.getId()) {
-                    leaderboard.add(user.getName() + " - " + quiz.getPercentage() + "% | " + quiz.getDate() + " | Me");
+                    leaderboard.add(user.getName() + " - " + quiz.getFormattedPercentage() + "% | " + quiz.getDate() + " | Me");
                     continue;
                 }
-                leaderboard.add(user.getName() + " - " + quiz.getPercentage() + "% | " + quiz.getDate());
+                leaderboard.add(user.getName() + " - " + quiz.getFormattedPercentage() + "% | " + quiz.getDate());
             } else {
-                leaderboard.add("Anonymous - " + quiz.getPercentage() + "% | " + quiz.getDate());
+                leaderboard.add("Anonymous - " + quiz.getFormattedPercentage() + "% | " + quiz.getDate());
             }
         }
     }
