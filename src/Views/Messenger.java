@@ -11,39 +11,33 @@ public class Messenger {
     }
 
     public void twoLineTitle(String firstTitle, String secondTitle) {
-        System.out.println(
-                """
-                        \n
-                        ______________________________________________________________
-                        """ + firstTitle + "\n\n" + """
-                        """ + secondTitle + """
-                        \n______________________________________________________________
-                        """);
+        System.out.println("""
+                \n
+                ______________________________________________________________
+                """ + firstTitle + "\n\n" + """
+                """ + secondTitle + """
+                \n______________________________________________________________
+                """);
     }
 
     public void loginSuccessfully(String username) {
-        System.out.println("\n\n" +
-                """
-                        ______________________________
-                         User logged in successfully
-                         
-                         Hello\t""" + username +
-                """
-                        \n______________________________
-                        """
-        );
+        System.out.println("\n\n" + """
+                ______________________________
+                 User logged in successfully
+                 
+                 Hello\t""" + username + """
+                \n______________________________
+                """);
     }
 
     public void loginFailed() {
-        System.out.println("\n\n" +
-                """
-                        ______________________________
-                         User login failed
-                         
-                         Please check your credentials
-                        ______________________________
-                        """
-        );
+        System.out.println("\n\n" + """
+                ______________________________
+                 User login failed
+                 
+                 Please check your credentials
+                ______________________________
+                """);
     }
 
     public void registerSuccessfully(String username) {
@@ -120,6 +114,18 @@ public class Messenger {
                  Please enter the option
                  """ + "Old option: " + oldOption + """
                 \n______________________________________________________
+                """);
+    }
+
+    public void notFound(String type) {
+        System.out.println("""
+                \n
+                ______________________________________________________________
+                """ + type + """ 
+                 not found!
+                                
+                Please try again
+                \n______________________________________________________________
                 """);
     }
 }
