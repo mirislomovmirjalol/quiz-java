@@ -5,7 +5,6 @@ import Data.Interfaces.IQuestionData;
 import Data.QuestionData;
 import Models.Option;
 import Models.Question;
-import Views.Admin.AdminMenu;
 import Views.Admin.QuestionMenu;
 
 import java.util.ArrayList;
@@ -14,18 +13,16 @@ public class QuestionController {
 
     AuthController authController;
     IQuestionData questionData = new QuestionData();
-    AdminController adminController;
     ArrayList<Question> questions = new ArrayList<Question>();
 
 
-    public QuestionController(AuthController authController, AdminController adminController) {
+    public QuestionController(AuthController authController) {
         this.authController = authController;
-        this.adminController = adminController;
     }
 
     public void showQuestions(boolean isAction) {
         questions = questionData.getQuestions();
-        QuestionMenu questionMenu = new QuestionMenu(authController, adminController);
+        QuestionMenu questionMenu = new QuestionMenu(authController);
         questionMenu.show(questions, isAction);
     }
 
@@ -62,7 +59,11 @@ public class QuestionController {
 
     public void deleteQuestion(int id) {
         Question questionToDelete = getQuestionById(id);
+        if (questionToDelete == null) {
+            return;
+        }
         questions.remove(questionToDelete);
         questionData.updateQuestions(questions);
     }
+
 }
