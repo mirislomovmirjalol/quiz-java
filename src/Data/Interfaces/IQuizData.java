@@ -14,4 +14,7 @@ public interface IQuizData {
     int getLastId();
 
     int getUpdatedId();
+
+    void updateQuizzes(ArrayList<Quiz> quizzes);
+    Quiz getQuizById(int id);
 }

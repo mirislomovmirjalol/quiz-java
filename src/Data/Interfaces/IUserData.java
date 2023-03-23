@@ -18,4 +18,6 @@ public interface IUserData {
     int getUpdatedId();
 
     boolean isUserNameUnique(String username);
+
+    User getUserById(int id);
 }
