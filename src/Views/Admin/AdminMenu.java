@@ -1,7 +1,6 @@
 package Views.Admin;
 
 import Controllers.Admin.AdminController;
-import Controllers.Admin.UserController;
 import Controllers.AuthController;
 import Views.KeyboardReader;
 import Views.Messenger;
@@ -49,11 +48,12 @@ public class AdminMenu {
     }
 
     public void quizzes() {
-        System.out.println("Quizzes");
+        QuizMenu quizMenu = new QuizMenu(authController);
+        quizMenu.run();
     }
 
     public void questions() {
-        QuestionMenu questionMenu = new QuestionMenu(authController, adminController);
+        QuestionMenu questionMenu = new QuestionMenu(authController);
         questionMenu.run();
     }
 }
