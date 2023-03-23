@@ -1,38 +1,34 @@
 package Views.Admin;
 
-import Controllers.Admin.AdminController;
 import Controllers.Admin.QuestionController;
 import Controllers.AuthController;
 import Models.Option;
 import Models.Question;
 import Views.KeyboardReader;
 import Views.Messenger;
-
 import java.util.ArrayList;
 
 public class QuestionMenu {
     KeyboardReader keyboardReader = new KeyboardReader();
     AuthController authController;
     QuestionController questionController;
-    AdminController adminController;
     Messenger messenger = new Messenger();
 
-    public QuestionMenu(AuthController authController, AdminController adminController) {
+    public QuestionMenu(AuthController authController) {
         this.authController = authController;
-        this.adminController = adminController;
-        this.questionController = new QuestionController(authController, adminController);
+        this.questionController = new QuestionController(authController);
     }
 
     public void run() {
+        if (!authController.isUserAdmin()) {
+            messenger.notAdmin();
+            return;
+        }
         final int SHOW_QUESTIONS = 1;
         final int CREATE_QUESTION = 2;
         final int UPDATE_QUESTION = 3;
         final int DELETE_QUESTION = 4;
         final int BACK_OPTION = 5;
-        if (!authController.isUserAdmin()) {
-            messenger.notAdmin();
-            return;
-        }
         messenger.oneLineTitle("Questions");
         String[] options = {"Show", "Create", "Update", "Delete", "Back"};
         boolean exit = false;
@@ -90,7 +86,7 @@ public class QuestionMenu {
     public void update() {
         questionController.showQuestions(true);
         messenger.oneLineTitle("Please enter the question id that you want to update");
-        int id = keyboardReader.getInt("Id", 0, questionController.sizeOfQuestions());
+        int id = keyboardReader.getInt("Id", 0, Integer.MAX_VALUE);
         Question question = questionController.getQuestionById(id);
         if (question == null) {
             messenger.oneLineTitle("Question not found!");
@@ -132,7 +128,7 @@ public class QuestionMenu {
     public void delete() {
         questionController.showQuestions(true);
         messenger.oneLineTitle("Please enter the question id that you want to delete");
-        int id = keyboardReader.getInt("Id", 0, questionController.sizeOfQuestions());
+        int id = keyboardReader.getInt("Id", 0, Integer.MAX_VALUE);
         Question question = questionController.getQuestionById(id);
         if (question == null) {
             messenger.oneLineTitle("Question not found!");
