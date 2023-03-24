@@ -69,6 +69,20 @@ public class QuizData implements IQuizData {
     }
 
     @Override
+    public void updateQuizzes(ArrayList<Quiz> quizzes) {
+        try {
+            FileWriter writer = new FileWriter(quizzesPath);
+            for (Quiz quiz : quizzes) {
+                writer.write(quiz.getId() + "," + quiz.getUserId() + "," + quiz.getScore() + "," + quiz.getMaxScore() + "," + quiz.getPercentage() + "," + quiz.getDate() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public ArrayList<Quiz> getQuizzes() {
         return quizzes;
     }
@@ -82,5 +96,15 @@ public class QuizData implements IQuizData {
     public int getUpdatedId() {
         readQuizzesFromFile();
         return lastId + 1;
+    }
+
+    @Override
+    public Quiz getQuizById(int id) {
+        for (Quiz quiz : quizzes) {
+            if (quiz.getId() == id) {
+                return quiz;
+            }
+        }
+        return null;
     }
 }
