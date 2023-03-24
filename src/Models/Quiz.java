@@ -3,8 +3,6 @@ package Models;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import static java.lang.Math.round;
-
 public class Quiz {
     private int id;
     private int userId;
