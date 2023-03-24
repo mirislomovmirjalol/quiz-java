@@ -10,7 +10,7 @@ public class AuthController {
     Middleware middleware = new Middleware();
 
     public boolean register(String name, String username, String password) {
-        if (userData.isUserNameUnique(username)) {
+        if (!userData.isUserNameUnique(username)) {
             return false;
         }
         this.user = new User(userData.getUpdatedId(), name, username, password, false);

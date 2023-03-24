@@ -89,6 +89,7 @@ public class UserData implements IUserData {
         return lastId + 1;
     }
 
+    @Override
     public boolean isUserNameUnique(String username) {
         readUsersFromFile();
         for (User user : users) {
@@ -99,6 +100,7 @@ public class UserData implements IUserData {
         return true;
     }
 
+    @Override
     public User getUserById(int id) {
         readUsersFromFile();
         for (User user : users) {
