@@ -20,6 +20,7 @@ public class QuizController {
     IQuestionData questionData = new QuestionData();
     IQuizData IQuizData = new QuizData();
     AuthController authController;
+    Boolean isRandomizeQuestions = true;
 
     public QuizController(AuthController authController) {
         this.authController = authController;
@@ -30,6 +31,13 @@ public class QuizController {
     public void startQuiz() {
         QuizMenu quizMenu = new QuizMenu();
         Quiz quiz = new Quiz(IQuizData.getUpdatedId());
+        if (isRandomizeQuestions) {
+            Collections.shuffle(questions, new Random());
+        }
+        if (questions.size() == 0) {
+            Views.MainMenu mainMenu = new Views.MainMenu(authController);
+            mainMenu.run();
+        }
         quiz.setQuestions(questions);
         quiz.setMaxScore(questions.size());
         int score = 0;
