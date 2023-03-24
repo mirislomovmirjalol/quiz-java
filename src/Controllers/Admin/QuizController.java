@@ -1,19 +1,39 @@
 package Controllers.Admin;
 
 import Controllers.AuthController;
-import Data.Interfaces.IQuestionData;
-import Data.QuestionData;
-import Models.Question;
+import Data.Interfaces.IQuizData;
+import Data.QuizData;
+import Models.Quiz;
+import Views.Admin.QuizMenu;
 
 import java.util.ArrayList;
 
 public class QuizController {
     AuthController authController;
+    ArrayList<Quiz> quizzes = new ArrayList<>();
+    IQuizData quizData = new QuizData();
 
-    AdminController adminController;
-    ArrayList<Question> questions = new ArrayList<Question>();
-    public QuizController(AuthController authController, AdminController adminController) {
+    public QuizController(AuthController authController) {
         this.authController = authController;
-        this.adminController = adminController;
+    }
+
+    public void showQuizzes(boolean isAction) {
+        quizzes = quizData.getQuizzes();
+        QuizMenu quizMenu = new QuizMenu(authController);
+        quizMenu.show(quizzes, isAction);
+    }
+
+    public void deleteQuiz(Quiz quizToDelete) {
+        quizzes.remove(quizToDelete);
+        quizData.updateQuizzes(quizzes);
+    }
+
+    public Quiz getQuizById(int id) {
+        for (Quiz quiz : quizData.getQuizzes()) {
+            if (quiz.getId() == id) {
+                return quiz;
+            }
+        }
+        return null;
     }
 }
