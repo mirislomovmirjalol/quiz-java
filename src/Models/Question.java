@@ -7,12 +7,22 @@ public class Question {
     private String question;
     private Option answer;
     private ArrayList<Option> options;
+    private int categoryId;
 
-    public Question(int id, String question, Option answer, ArrayList<Option> options) {
+    public Question(int id, String question, Option answer, ArrayList<Option> options, int categoryId) {
         setId(id);
         setQuestion(question);
         setAnswer(answer);
         setOptions(options);
+        setCategoryId(categoryId);
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getQuestion() {
