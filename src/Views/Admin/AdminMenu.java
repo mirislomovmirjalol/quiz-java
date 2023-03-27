@@ -1,6 +1,7 @@
 package Views.Admin;
 
 import Controllers.Admin.AdminController;
+import Controllers.Admin.CategoriesController;
 import Controllers.AuthController;
 import Views.KeyboardReader;
 import Views.Messenger;
@@ -20,13 +21,14 @@ public class AdminMenu {
         final int USERS_OPTION = 1;
         final int QUIZZES_OPTION = 2;
         final int QUESTIONS_OPTION = 3;
-        final int BACK_OPTION = 4;
+        final int CATEGORIES_OPTION = 4;
+        final int BACK_OPTION = 5;
         messenger.oneLineTitle("Admin panel");
         if (!authController.isUserAdmin()) {
             messenger.notAdmin();
             return;
         }
-        String[] options = {"Users", "Quizzes", "Questions", "Back"};
+        String[] options = {"Users", "Quizzes", "Questions", "Categories", "Back"};
         boolean exit = false;
         while (!exit) {
             for (int i = 0; i < options.length; i++) {
@@ -37,6 +39,7 @@ public class AdminMenu {
                 case USERS_OPTION -> users();
                 case QUIZZES_OPTION -> quizzes();
                 case QUESTIONS_OPTION -> questions();
+                case CATEGORIES_OPTION -> categories();
                 case BACK_OPTION -> exit = true;
             }
         }
@@ -55,5 +58,10 @@ public class AdminMenu {
     public void questions() {
         QuestionMenu questionMenu = new QuestionMenu(authController);
         questionMenu.run();
+    }
+
+    public void categories() {
+        CategoriesMenu categoriesMenu = new CategoriesMenu(authController);
+        categoriesMenu.run();
     }
 }
