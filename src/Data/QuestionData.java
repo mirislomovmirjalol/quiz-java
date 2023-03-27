@@ -32,14 +32,15 @@ public class QuestionData implements IQuestionData {
                 String[] data = line.split(";");
                 int id = Integer.parseInt(data[0]);
                 lastId = id;
-                String question = data[1];
-                String answer = data[2];
-                String[] optionsString = data[3].split(",");
+                int categoryId = Integer.parseInt(data[1]);
+                String question = data[2];
+                String answer = data[3];
+                String[] optionsString = data[4].split(",");
                 for (String option : optionsString) {
                     options.add(new Option(option, false));
                 }
                 options.add(new Option(answer, true));
-                Question newQuestion = new Question(id, question, new Option(answer, true), options);
+                Question newQuestion = new Question(id, question, new Option(answer, true), options, categoryId);
                 questions.add(newQuestion);
             }
             myReader.close();
