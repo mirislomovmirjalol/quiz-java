@@ -170,7 +170,6 @@ public class QuestionMenu {
             case REMOVE_OPTION -> {
                 updateRemoveOptions(question);
             }
-
         }
     }
 
