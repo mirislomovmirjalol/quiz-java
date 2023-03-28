@@ -30,6 +30,9 @@ public class CategoriesController {
 
     public void update(int id, Category category) {
         Category categoryToUpdate = categoryData.getCategoryById(id);
+        if (categoryToUpdate == null) {
+            return;
+        }
         int indexOfCategory = categories.indexOf(categoryToUpdate);
         categories.set(indexOfCategory, category);
         categoryData.updateCategories(categories);

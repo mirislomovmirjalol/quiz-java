@@ -29,9 +29,8 @@ public class CategoriesMenu {
         final int CREATE_CATEGORY = 2;
         final int UPDATE_CATEGORY = 3;
         final int DELETE_CATEGORY = 4;
-        final int BACK_OPTION = 5;
         messenger.oneLineTitle("Categories");
-        String[] options = {"Show", "Create", "Update", "Delete", "Back"};
+        String[] options = {"Show", "Create", "Update", "Delete"};
         boolean exit = false;
 
 
@@ -45,7 +44,6 @@ public class CategoriesMenu {
                 case CREATE_CATEGORY -> create();
                 case UPDATE_CATEGORY -> update();
                 case DELETE_CATEGORY -> delete();
-                case BACK_OPTION -> exit = true;
             }
         }
     }
@@ -90,6 +88,15 @@ public class CategoriesMenu {
                 case UPDATE_TITLE -> updateTitle(category);
                 case UPDATE_DESCRIPTION -> updateDescription(category);
             }
+        }
+        messenger.oneLineTitle("Have you finished updating?");
+        messenger.oneLineTitle("Have you finished updating?");
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+        int choice = keyboardReader.getInt("Please choose an option", 1, 2);
+        if (choice == 1) {
+            categoriesController.update(id, category);
+            exit = true;
         }
     }
 
