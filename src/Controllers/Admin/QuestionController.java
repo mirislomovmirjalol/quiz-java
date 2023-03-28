@@ -33,7 +33,7 @@ public class QuestionController {
         for (String option : optionsArray) {
             optionsList.add(new Option(option, false));
         }
-        Question newQuestion = new Question(questionData.getUpdatedId(), question, answerOption, optionsList);
+        Question newQuestion = new Question(questionData.getUpdatedId(), question, answerOption, optionsList, 1);
         questionData.saveQuestionToFile(newQuestion);
     }
 
