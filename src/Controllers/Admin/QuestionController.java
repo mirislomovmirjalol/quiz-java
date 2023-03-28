@@ -65,5 +65,4 @@ public class QuestionController {
         questions.remove(questionToDelete);
         questionData.updateQuestions(questions);
     }
-
 }

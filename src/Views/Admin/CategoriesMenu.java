@@ -2,6 +2,7 @@ package Views.Admin;
 
 import Controllers.Admin.CategoriesController;
 import Controllers.AuthController;
+import Data.CategoryData;
 import Models.Category;
 import Views.KeyboardReader;
 import Views.Messenger;
@@ -13,11 +14,13 @@ public class CategoriesMenu {
     ArrayList<Category> categories = new ArrayList<Category>();
     Messenger messenger = new Messenger();
     KeyboardReader keyboardReader = new KeyboardReader();
+    CategoryData categoryData = new CategoryData();
     CategoriesController categoriesController;
 
     public CategoriesMenu(AuthController authController) {
         this.authController = authController;
         this.categoriesController = new CategoriesController(authController);
+        this.categories = categoryData.getCategories();
     }
 
     public void run() {
@@ -29,8 +32,9 @@ public class CategoriesMenu {
         final int CREATE_CATEGORY = 2;
         final int UPDATE_CATEGORY = 3;
         final int DELETE_CATEGORY = 4;
+        final int BACK = 5;
         messenger.oneLineTitle("Categories");
-        String[] options = {"Show", "Create", "Update", "Delete"};
+        String[] options = {"Show", "Create", "Update", "Delete", "Back"};
         boolean exit = false;
 
 
@@ -44,11 +48,12 @@ public class CategoriesMenu {
                 case CREATE_CATEGORY -> create();
                 case UPDATE_CATEGORY -> update();
                 case DELETE_CATEGORY -> delete();
+                case BACK -> exit = true;
             }
         }
     }
 
-    public void showCategories(ArrayList<Category> categories, boolean isAction) {
+    public void showCategories(boolean isAction) {
         for (Category category : categories) {
             System.out.println(category.getId() + ". " + category.getName() + " | " + category.getDescription());
         }
@@ -69,7 +74,7 @@ public class CategoriesMenu {
         categoriesController.showCategories(true);
         messenger.oneLineTitle("Please enter id of category to update");
         int id = keyboardReader.getInt("Id", 0, Integer.MAX_VALUE);
-        Category category = categoriesController.getCategory(id);
+        Category category = categoriesController.getCategoryById(id);
         if (category == null) {
             messenger.notFound("Category");
             return;
@@ -101,7 +106,15 @@ public class CategoriesMenu {
     }
 
     public void delete() {
-        System.out.println("delete");
+        categoriesController.showCategories(true);
+        messenger.oneLineTitle("Please enter id of category to delete");
+        int id = keyboardReader.getInt("Id", 0, Integer.MAX_VALUE);
+        Category category = categoriesController.getCategoryById(id);
+        if (category == null) {
+            messenger.notFound("Category");
+            return;
+        }
+        categoriesController.delete(id);
     }
 
     public void updateTitle(Category category) {

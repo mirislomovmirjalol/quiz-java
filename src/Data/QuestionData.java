@@ -56,9 +56,9 @@ public class QuestionData implements IQuestionData {
         try {
             FileWriter writer = new FileWriter(questionsPath);
             for (Question question : questions) {
-                writer.write(question.getId() + ";" + question.getQuestion() + ";" + question.getAnswer().getOption() + ";" + question.getOptionsString() + "\n");
+                writer.write(question.getId() + ";" + question.getCategoryId() + ";" + question.getQuestion() + ";" + question.getAnswer().getOption() + ";" + question.getOptionsString() + "\n");
             }
-            writer.write(newQuestion.getId() + ";" + newQuestion.getQuestion() + ";" + newQuestion.getAnswer().getOption() + ";" + newQuestion.getOptionsString() + "\n");
+            writer.write(newQuestion.getId() + ";" + newQuestion.getCategoryId() + ";" + newQuestion.getQuestion() + ";" + newQuestion.getAnswer().getOption() + ";" + newQuestion.getOptionsString() + "\n");
             writer.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -71,7 +71,7 @@ public class QuestionData implements IQuestionData {
         try {
             FileWriter writer = new FileWriter(questionsPath);
             for (Question question : questions) {
-                writer.write(question.getId() + ";" + question.getQuestion() + ";" + question.getAnswer().getOption() + ";" + question.getOptionsString() + "\n");
+                writer.write(question.getId() + ";" + question.getCategoryId() + ";" + question.getQuestion() + ";" + question.getAnswer().getOption() + ";" + question.getOptionsString() + "\n");
             }
             writer.close();
         } catch (IOException e) {

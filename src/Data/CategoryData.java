@@ -84,6 +84,7 @@ public class CategoryData {
     }
 
     public Category getCategoryById(int id) {
+        readCategoriesFromFile();
         for (Category category : categories) {
             if (category.getId() == id) {
                 return category;
