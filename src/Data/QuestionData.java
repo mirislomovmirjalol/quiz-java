@@ -101,4 +101,19 @@ public class QuestionData implements IQuestionData {
     public Question getQuestionById(int id) {
         return questions.get(id);
     }
+
+    @Override
+    public void deleteQuestionsByCategoryId(int categoryId) {
+        readQuestionsFromFile();
+        ArrayList<Question> questionsToDelete = new ArrayList<Question>();
+        for (Question question : questions) {
+            if (question.getCategoryId() == categoryId) {
+                questionsToDelete.add(question);
+            }
+        }
+        for (Question question : questionsToDelete) {
+            questions.remove(question);
+        }
+        updateQuestions(questions);
+    }
 }
