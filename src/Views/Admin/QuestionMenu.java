@@ -1,11 +1,14 @@
 package Views.Admin;
 
+import Controllers.Admin.CategoriesController;
 import Controllers.Admin.QuestionController;
 import Controllers.AuthController;
+import Models.Category;
 import Models.Option;
 import Models.Question;
 import Views.KeyboardReader;
 import Views.Messenger;
+
 import java.util.ArrayList;
 
 public class QuestionMenu {
@@ -52,7 +55,9 @@ public class QuestionMenu {
 
     public void show(ArrayList<Question> questions, boolean isAction) {
         for (Question question : questions) {
-            System.out.println(question.getId() + ". " + question.getQuestion() + " | " + question.getAnswer().getOption() + " | " + question.getOptionsString());
+            CategoriesController categoriesController = new CategoriesController(authController);
+            Category category = categoriesController.getCategoryById(question.getCategoryId());
+            System.out.println(question.getId() + ". " + category.getName() + " | "+ question.getQuestion() + " | " + question.getAnswer().getOption() + " | " + question.getOptionsString());
         }
         System.out.println("\n");
         if (!isAction) {
@@ -61,6 +66,15 @@ public class QuestionMenu {
     }
 
     public void create() {
+        messenger.oneLineTitle("Please enter category id");
+        CategoriesController categoriesController = new CategoriesController(authController);
+        categoriesController.showCategories(true);
+        int categoryId = keyboardReader.getInt("Category id", 0, Integer.MAX_VALUE);
+        categoriesController.getCategoryById(categoryId);
+        if (categoriesController.getCategoryById(categoryId) == null) {
+            messenger.notFound("Category");
+            return;
+        }
         messenger.oneLineTitle("Please enter the question");
         String question = keyboardReader.getString("Question", false);
         messenger.oneLineTitle("Please enter the answer");
@@ -80,7 +94,7 @@ public class QuestionMenu {
                 finishOptions = false;
             }
         }
-        questionController.createQuestion(question, answer, options.toString());
+        questionController.createQuestion(question, answer, options.toString(), categoryId);
     }
 
     public void update() {
@@ -95,10 +109,12 @@ public class QuestionMenu {
         final int UPDATE_QUESTION = 1;
         final int UPDATE_ANSWER = 2;
         final int UPDATE_OPTIONS = 3;
+        final int CATEGORY_ID_OPTION = 4;
+        final int BACK_OPTION = 5;
         boolean exit = false;
         while (!exit) {
             messenger.oneLineTitle("What do you want to update?");
-            String[] options = {"Question", "Answer", "Options", "Back"};
+            String[] options = {"Question", "Answer", "Options", "Category", "Back"};
             for (int i = 0; i < options.length; i++) {
                 System.out.println((i + 1) + ". " + options[i]);
             }
@@ -113,6 +129,10 @@ public class QuestionMenu {
                 case UPDATE_OPTIONS -> {
                     updateOptions(question);
                 }
+                case CATEGORY_ID_OPTION -> {
+                    updateCategoryId(question);
+                }
+                case BACK_OPTION -> exit = true;
             }
             messenger.oneLineTitle("Have you finished updating?");
             System.out.println("1. Yes");
@@ -123,6 +143,19 @@ public class QuestionMenu {
                 exit = true;
             }
         }
+    }
+
+    public void updateCategoryId(Question question) {
+        messenger.updateCategoryId(question.getCategoryId());
+        CategoriesController categoriesController = new CategoriesController(authController);
+        categoriesController.showCategories(true);
+        int categoryId = keyboardReader.getInt("Category id", 0, Integer.MAX_VALUE);
+        categoriesController.getCategoryById(categoryId);
+        if (categoriesController.getCategoryById(categoryId) == null) {
+            messenger.notFound("Category");
+            return;
+        }
+        question.setCategoryId(categoryId);
     }
 
     public void delete() {
