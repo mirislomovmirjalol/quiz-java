@@ -2,6 +2,8 @@ package Controllers.Admin;
 
 import Controllers.AuthController;
 import Data.CategoryData;
+import Data.Interfaces.IQuestionData;
+import Data.QuestionData;
 import Models.Category;
 import Views.Admin.CategoriesMenu;
 
@@ -56,6 +58,8 @@ public class CategoriesController {
         if (categoryToDelete == null) {
             return;
         }
+        IQuestionData questionData = new QuestionData();
+        questionData.deleteQuestionsByCategoryId(id);
         categories.remove(categoryToDelete);
         categoryData.updateCategories(categories);
     }

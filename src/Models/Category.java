@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class Category {
     private int id;
-    private String title;
+    private String name;
     private String description;
     private ArrayList<Question> questions;
 
-    public Category(int id, String title, String description) {
+    public Category(int id, String name, String description) {
         setId(id);
-        setName(title);
+        setName(name);
         setDescription(description);
     }
 
@@ -23,11 +23,11 @@ public class Category {
     }
 
     public String getName() {
-        return title;
+        return name;
     }
 
-    public void setName(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
