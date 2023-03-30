@@ -18,4 +18,5 @@ public interface IQuestionData {
     int getUpdatedId();
 
     Question getQuestionById(int id);
+    void deleteQuestionsByCategoryId(int categoryId);
 }
