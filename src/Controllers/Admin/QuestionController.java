@@ -26,14 +26,14 @@ public class QuestionController {
         questionMenu.show(questions, isAction);
     }
 
-    public void createQuestion(String question, String answer, String options) {
+    public void createQuestion(String question, String answer, String options, int categoryId) {
         Option answerOption = new Option(answer, true);
         ArrayList<Option> optionsList = new ArrayList<Option>();
         String[] optionsArray = options.split(",");
         for (String option : optionsArray) {
             optionsList.add(new Option(option, false));
         }
-        Question newQuestion = new Question(questionData.getUpdatedId(), question, answerOption, optionsList, 1);
+        Question newQuestion = new Question(questionData.getUpdatedId(), question, answerOption, optionsList, categoryId);
         questionData.saveQuestionToFile(newQuestion);
     }
 

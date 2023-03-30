@@ -128,4 +128,13 @@ public class Messenger {
                 \n______________________________________________________________
                 """);
     }
+
+    public void updateCategoryId(int oldCategoryId) {
+        System.out.println("\n\n" + """
+                ______________________________________________________
+                 Please enter category id
+                 """ + "Old category id: " + oldCategoryId + """
+                \n______________________________________________________
+                """);
+    }
 }

@@ -1,7 +1,6 @@
 package Data;
 
 import Models.Category;
-import Models.Quiz;
 
 import java.io.File;
 import java.io.FileWriter;
