@@ -18,7 +18,7 @@ class AuthControllerTest {
         String login = "testLogin" + timestamp.format(new Timestamp(System.currentTimeMillis()));
         String password = "testPassword";
         boolean isAdmin = false;
-        if (!userData.isUserNameUnique(login)) {
+        if (userData.isUserNameUnique(login)) {
             Messenger messenger = new Messenger();
             messenger.oneLineTitle("Username is already taken!");
             return;
