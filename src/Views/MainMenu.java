@@ -1,9 +1,13 @@
 package Views;
 
 import Controllers.Admin.AdminController;
+import Controllers.Admin.CategoriesController;
 import Controllers.AuthController;
 import Controllers.QuizController;
 import Controllers.LeaderboardController;
+import Data.CategoryData;
+import Data.Interfaces.ICategoryData;
+import Models.Category;
 
 public class MainMenu {
     KeyboardReader keyboardReader = new KeyboardReader();
@@ -49,7 +53,16 @@ public class MainMenu {
     }
 
     public void quiz() {
-        quizController.startQuiz();
+        CategoriesController categoriesController = new CategoriesController(authController);
+        categoriesController.showCategories(true);
+        int categoryId = keyboardReader.getInt("Please choose a category", 0, Integer.MAX_VALUE);
+        ICategoryData categoryData = new CategoryData();
+        Category category = categoryData.getCategoryById(categoryId);
+        if (category == null) {
+            messenger.notFound("category");
+            return;
+        }
+        quizController.startQuiz(category);
     }
 
     public void adminPanel() {

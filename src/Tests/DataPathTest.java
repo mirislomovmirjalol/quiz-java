@@ -24,4 +24,11 @@ public class DataPathTest {
         java.io.File file = new java.io.File(quizPath);
         FileReader fileReader = new FileReader(file);
     }
+
+    @org.junit.jupiter.api.Test
+    void categoriesData() throws FileNotFoundException {
+        final String categoriesPath = "src/Data/Database/Categories.csv";
+        java.io.File file = new java.io.File(categoriesPath);
+        FileReader fileReader = new FileReader(file);
+    }
 }

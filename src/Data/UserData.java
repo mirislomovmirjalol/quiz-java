@@ -94,10 +94,10 @@ public class UserData implements IUserData {
         readUsersFromFile();
         for (User user : users) {
             if (user.getLogin().equals(username)) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override

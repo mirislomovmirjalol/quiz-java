@@ -4,6 +4,7 @@ import Data.Interfaces.IQuestionData;
 import Data.Interfaces.IQuizData;
 import Data.QuestionData;
 import Data.QuizData;
+import Models.Category;
 import Models.Question;
 import Models.Quiz;
 import Views.QuizMenu;
@@ -24,13 +25,16 @@ public class QuizController {
 
     public QuizController(AuthController authController) {
         this.authController = authController;
-        questionData.readQuestionsFromFile();
-        questions = questionData.getQuestions();
     }
 
-    public void startQuiz() {
+    public void startQuiz(Category category) {
         QuizMenu quizMenu = new QuizMenu();
         Quiz quiz = new Quiz(IQuizData.getUpdatedId());
+        questions = category.getQuestions();
+        if (questions.size() == 0) {
+            quizMenu.noQuestions();
+            return;
+        }
         if (isRandomizeQuestions) {
             Collections.shuffle(questions, new Random());
         }
