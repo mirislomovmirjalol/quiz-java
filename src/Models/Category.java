@@ -1,12 +1,14 @@
 package Models;
 
+import Data.QuestionData;
+
 import java.util.ArrayList;
 
 public class Category {
     private int id;
     private String name;
     private String description;
-    private ArrayList<Question> questions;
+    private ArrayList<Question> questions = new ArrayList<Question>();
 
     public Category(int id, String name, String description) {
         setId(id);
@@ -39,6 +41,17 @@ public class Category {
     }
 
     public ArrayList<Question> getQuestions() {
+        QuestionData questionData = new QuestionData();
+        questionData.readQuestionsFromFile();
+        ArrayList<Question> allQuestions = questionData.getQuestions();
+        for (Question question : allQuestions) {
+            if (question == null) {
+                return null;
+            }
+            if (question.getCategoryId() == this.id) {
+                questions.add(question);
+            }
+        }
         return questions;
     }
 

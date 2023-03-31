@@ -3,6 +3,7 @@ package Views.Admin;
 import Controllers.Admin.CategoriesController;
 import Controllers.AuthController;
 import Data.CategoryData;
+import Data.Interfaces.ICategoryData;
 import Models.Category;
 import Views.KeyboardReader;
 import Views.Messenger;
@@ -14,7 +15,7 @@ public class CategoriesMenu {
     ArrayList<Category> categories = new ArrayList<Category>();
     Messenger messenger = new Messenger();
     KeyboardReader keyboardReader = new KeyboardReader();
-    CategoryData categoryData = new CategoryData();
+    ICategoryData categoryData = new CategoryData();
     CategoriesController categoriesController;
 
     public CategoriesMenu(AuthController authController) {

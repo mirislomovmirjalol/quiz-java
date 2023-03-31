@@ -2,6 +2,7 @@ package Controllers.Admin;
 
 import Controllers.AuthController;
 import Data.CategoryData;
+import Data.Interfaces.ICategoryData;
 import Data.Interfaces.IQuestionData;
 import Data.QuestionData;
 import Models.Category;
@@ -10,7 +11,7 @@ import Views.Admin.CategoriesMenu;
 import java.util.ArrayList;
 
 public class CategoriesController {
-    CategoryData categoryData = new CategoryData();
+    ICategoryData categoryData = new CategoryData();
     AuthController authController;
     ArrayList<Category> categories = categoryData.getCategories();
 
