@@ -15,7 +15,7 @@ public class MainMenu {
     QuizController quizController;
     AdminController adminController;
     Messenger messenger = new Messenger();
-
+    boolean logout = false;
 
     public MainMenu(AuthController authController) {
         this.authController = authController;
@@ -26,16 +26,15 @@ public class MainMenu {
         final int ADMIN_PANEL_OPTION = 0;
         final int QUIZ_OPTION = 1;
         final int LEADERBOARD_OPTION = 2;
-        final int EXIT_OPTION = 3;
+        final int LOGOUT_OPTION = 3;
         if (!authController.isUserLoggedIn()) {
             messenger.notLoggedIn();
             return;
         }
-        String[] options = {"Start the quiz", "Show leaderboard", "Exit"};
-        boolean exit = false;
+        String[] options = {"Start the quiz", "Show leaderboard", "Log out"};
         System.out.println("\n");
 
-        while (!exit) {
+        while (!logout) {
             if (authController.isUserAdmin()) {
                 System.out.println("0. Admin panel");
             }
@@ -47,9 +46,15 @@ public class MainMenu {
                 case ADMIN_PANEL_OPTION -> adminPanel();
                 case QUIZ_OPTION -> quiz();
                 case LEADERBOARD_OPTION -> leaderboard();
-                case EXIT_OPTION -> System.exit(0);
+                case LOGOUT_OPTION -> logout();
             }
         }
+    }
+
+    private void logout() {
+        authController.logout();
+        messenger.logoutSuccessfully();
+        logout = true;
     }
 
     public void quiz() {
