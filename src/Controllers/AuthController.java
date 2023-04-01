@@ -46,4 +46,9 @@ public class AuthController {
     public boolean isUserAdmin() {
         return middleware.isUserAdmin();
     }
+
+    public void logout() {
+        this.user = null;
+        middleware.logout();
+    }
 }
