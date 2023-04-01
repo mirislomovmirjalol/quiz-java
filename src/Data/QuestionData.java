@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class QuestionData implements IQuestionData {
-    private String questionsPath = "src/Data/Database/Questions.csv";
-    private ArrayList<Question> questions = new ArrayList<Question>();
+    private final String questionsPath = "src/Data/Database/Questions.csv";
+    private final ArrayList<Question> questions = new ArrayList<Question>();
     private int lastId = 0;
 
     public QuestionData() {

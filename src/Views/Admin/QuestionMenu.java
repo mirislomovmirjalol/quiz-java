@@ -57,7 +57,7 @@ public class QuestionMenu {
         for (Question question : questions) {
             CategoriesController categoriesController = new CategoriesController(authController);
             Category category = categoriesController.getCategoryById(question.getCategoryId());
-            System.out.println(question.getId() + ". " + category.getName() + " | "+ question.getQuestion() + " | " + question.getAnswer().getOption() + " | " + question.getOptionsString());
+            System.out.println(question.getId() + ". " + category.getName() + " | " + question.getQuestion() + " | " + question.getAnswer().getOption() + " | " + question.getOptionsString());
         }
         System.out.println("\n");
         if (!isAction) {

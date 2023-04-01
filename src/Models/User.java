@@ -1,7 +1,5 @@
 package Models;
 
-import Controllers.Middleware;
-
 public class User {
     private int id;
     private String name;
@@ -18,20 +16,20 @@ public class User {
         setAdmin(isAdmin);
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
-
     public boolean isAdmin() {
         return isAdmin;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPassword() {
@@ -46,12 +44,12 @@ public class User {
         return name;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLogin() {
+        return login;
     }
 
     public void setLogin(String login) {

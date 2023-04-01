@@ -1,9 +1,7 @@
 package Views.Admin;
 
-import Controllers.Admin.AdminController;
 import Controllers.Admin.UserController;
 import Controllers.AuthController;
-import Models.Question;
 import Models.User;
 import Views.KeyboardReader;
 import Views.Messenger;
@@ -151,10 +149,6 @@ public class UserMenu {
             System.out.println((i + 1) + ". " + options[i]);
         }
         int choice = keyboardReader.getInt("Please choose an option", 1, options.length);
-        if (choice == 1) {
-            user.setAdmin(true);
-        } else {
-            user.setAdmin(false);
-        }
+        user.setAdmin(choice == 1);
     }
 }

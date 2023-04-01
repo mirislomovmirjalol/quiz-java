@@ -29,12 +29,24 @@ public class Question {
         return question;
     }
 
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
     public Option getAnswer() {
         return answer;
     }
 
+    public void setAnswer(Option answer) {
+        this.answer = answer;
+    }
+
     public ArrayList<Option> getOptions() {
         return options;
+    }
+
+    public void setOptions(ArrayList<Option> options) {
+        this.options = options;
     }
 
     public String getOptionsString() {
@@ -51,18 +63,6 @@ public class Question {
             optionsString.append(option.getOption()).append(",");
         }
         return optionsString.toString();
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
-    public void setAnswer(Option answer) {
-        this.answer = answer;
-    }
-
-    public void setOptions(ArrayList<Option> options) {
-        this.options = options;
     }
 
     public int getId() {

@@ -1,6 +1,5 @@
 package Views;
 
-import Controllers.QuizController;
 import Models.Option;
 
 import java.util.ArrayList;

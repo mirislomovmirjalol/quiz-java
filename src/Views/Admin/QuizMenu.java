@@ -52,16 +52,7 @@ public class QuizMenu {
     public void show(ArrayList<Quiz> quizzes, boolean isAction) {
         for (Quiz quiz : quizzes) {
             User user = userData.getUserById(quiz.getUserId());
-            System.out.println(
-                    quiz.getId()
-                            + ". " + user.getName()
-                            + " | " + quiz.getScore()
-                            + "/" + quiz.getMaxScore()
-                            + " | "
-                            + quiz.getPercentage()
-                            + "% | "
-                            + quiz.getDate()
-            );
+            System.out.println(quiz.getId() + ". " + user.getName() + " | " + quiz.getScore() + "/" + quiz.getMaxScore() + " | " + quiz.getPercentage() + "% | " + quiz.getDate());
         }
         if (!isAction) {
             keyboardReader.getString("Press enter to continue", true);

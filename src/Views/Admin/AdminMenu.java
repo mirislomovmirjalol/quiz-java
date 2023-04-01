@@ -1,7 +1,6 @@
 package Views.Admin;
 
 import Controllers.Admin.AdminController;
-import Controllers.Admin.CategoriesController;
 import Controllers.AuthController;
 import Views.KeyboardReader;
 import Views.Messenger;

@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class QuizData implements IQuizData {
     String quizzesPath = "src/Data/Database/Quizzes.csv";
 
-    private ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+    private final ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
 
     private int lastId = 0;
 

@@ -13,15 +13,15 @@ public class Option {
         return option;
     }
 
+    public void setOption(String option) {
+        this.option = option;
+    }
+
     public boolean isCorrect() {
         return isCorrect;
     }
 
     public void setIsCorrect(boolean isCorrect) {
         this.isCorrect = isCorrect;
-    }
-
-    public void setOption(String option) {
-        this.option = option;
     }
 }

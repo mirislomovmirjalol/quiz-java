@@ -2,7 +2,6 @@ package Controllers.Admin;
 
 import Controllers.AuthController;
 import Data.UserData;
-import Models.Question;
 import Models.User;
 
 import java.util.ArrayList;
