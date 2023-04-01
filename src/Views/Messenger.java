@@ -137,4 +137,12 @@ public class Messenger {
                 \n______________________________________________________
                 """);
     }
+
+    public void logoutSuccessfully() {
+        System.out.println("\n\n" + """
+                ______________________________
+                 User logged out successfully
+                ______________________________
+                """);
+    }
 }
