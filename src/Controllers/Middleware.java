@@ -20,4 +20,9 @@ public class Middleware {
     public boolean isUserAuthenticated() {
         return this.isUserAuthenticated;
     }
+
+    public void logout() {
+        this.isUserAuthenticated = false;
+        this.isUserAdmin = false;
+    }
 }
